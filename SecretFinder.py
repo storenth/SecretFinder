@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # SecretFinder - Tool for discover apikeys/accesstokens and sensitive data in js file
 # based to LinkFinder - github.com/GerbenJavado
 # By m4ll0k (@m4ll0k2) github.com/m4ll0k
@@ -35,6 +35,8 @@ from urllib.parse import urlparse
 
 # regex
 _regex = {
+    # 'url' : r'(https?):[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}[-a-zA-Z0-9@:%._\+~#=/?]*',
+    # 'possible_endpoint' : r'[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,3}[-a-zA-Z0-9@:%._\+~#=/?]*',
     'google_api'     : r'AIza[0-9A-Za-z-_]{35}',
     'firebase'  : r'AAAA[A-Za-z0-9_-]{7}:[A-Za-z0-9_-]{140}',
     'google_captcha' : r'6L[0-9A-Za-z-_]{38}|^6[0-9a-zA-Z_-]{39}$',
@@ -70,11 +72,15 @@ _regex = {
     'slack_token' : r"\"api_token\":\"(xox[a-zA-Z]-[a-zA-Z0-9-]+)\"",
     'SSH_privKey' : r"([-]+BEGIN [^\s]+ PRIVATE KEY[-]+[\s]*[^-]*[-]+END [^\s]+ PRIVATE KEY[-]+)",
     'Heroku API KEY' : r'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}',
-    'possible_Creds' : r"(?i)(" \
+    'possible_psw_creds' : r"(?i)(" \
                     r"password\s*[`=:\"]+\s*[^\s]+|" \
                     r"password is\s*[`=:\"]*\s*[^\s]+|" \
                     r"pwd\s*[`=:\"]*\s*[^\s]+|" \
                     r"passwd\s*[`=:\"]+\s*[^\s]+)",
+    'possible_root_creds' : r"(?i)(" \
+                    r"root\s*[`=:\"]+\s*[^\s]+|" \
+                    r"root is\s*[`=:\"]*\s*[^\s]+|" \
+                    r"admin\s*[`=:\"]+\s*[^\s]+)",
 }
 
 _template = '''
