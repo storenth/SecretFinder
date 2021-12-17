@@ -296,7 +296,7 @@ def html_save(output):
 def cli_output(matched):
     ''' cli output '''
     for match in matched:
-        print(match.get('name')+'\t->\t'+match.get('matched').encode('ascii','ignore').decode('utf-8'))
+        print(match.get('name')+'\t->\t'+match.get('matched')[:884].encode('ascii','ignore').decode('utf-8'))
 
 def urlParser(url):
     ''' urlParser '''
