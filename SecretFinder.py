@@ -86,6 +86,8 @@ _regex = {
     'possible_root_creds' : r"(?i)(" \
                     r"root\s*[`=:\"]+\s*[^\s]+|" \
                     r"root is\s*[`=:\"]*\s*[^\s]+|" \
+                    r"administrator\s*[`=:\"]*\s*[^\s]+|" \
+                    r"adm\s*[`=:\"]*\s*[^\s]+|" \
                     r"admin\s*[`=:\"]+\s*[^\s]+)",
     'possible_ssrf' : r"(?i)(" \
                     r"localhost\s*[`=:\"]+\s*[^\s]+|" \
