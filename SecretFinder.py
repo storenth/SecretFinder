@@ -87,6 +87,9 @@ _regex = {
                     r"root\s*[`=:\"]+\s*[^\s]+|" \
                     r"root is\s*[`=:\"]*\s*[^\s]+|" \
                     r"admin\s*[`=:\"]+\s*[^\s]+)",
+    'possible_ssrf' : r"(?i)(" \
+                    r"localhost\s*[`=:\"]+\s*[^\s]+|" \
+                    r"127\.0\.0\.1\s*[`=:\"]*\s*[^\s]+|",
 }
 
 _template = '''
