@@ -78,6 +78,7 @@ _regex = {
     'slack_token' : r"\"api_token\":\"(xox[a-zA-Z]-[a-zA-Z0-9-]+)\"",
     'SSH_privKey' : r"([-]+BEGIN [^\s]+ PRIVATE KEY[-]+[\s]*[^-]*[-]+END [^\s]+ PRIVATE KEY[-]+)",
     'Heroku API KEY' : r'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}',
+    # (?i) is the case-insensitive marker
     'possible_psw_creds' : r"(?i)(" \
                     r"password\s*[`=:\"]+\s*[^\s]+|" \
                     r"password is\s*[`=:\"]*\s*[^\s]+|" \
@@ -92,6 +93,9 @@ _regex = {
     'possible_ssrf' : r"(?i)(" \
                     r"localhost\s*[`=:\"\.\-/]+\s*[^\s]+|" \
                     r"127\.0\.0\.1\s*[`=:\"\.\-/]*\s*[^\s]+)",
+    'possible_databases' : r"(?i)(" \
+                    r"mysql\s*[`=:\"\.\-/]+\s*[^\s]+|" \
+                    r"postgres\s*[`=:\"\.\-/]*\s*[^\s]+)",
 }
 
 _template = '''
