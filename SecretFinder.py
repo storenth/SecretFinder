@@ -53,7 +53,7 @@ _regex = {
     'facebook_access_token' : r'EAACEdEose0cBA[0-9A-Za-z]+',
     'authorization_basic' : r'basic [a-zA-Z0-9=:_\+\/-]{5,100}',
     'authorization_bearer' : r'bearer [a-zA-Z0-9_\-\.=:_\+\/]{5,100}',
-    'authorization_api' : r'api[key|_key|\s+]+[a-zA-Z0-9_\-]{5,100}',
+    'authorization_api' : r'[Aa]pi([\.\ ]?[Kk]ey)+[}_\-\":=\s]+[a-zA-Z0-9_\-\"\.]{10,100}',
     'mailgun_api_key' : r'key-[0-9a-zA-Z]{32}',
     'twilio_api_key' : r'SK[0-9a-fA-F]{32}',
     'twilio_account_sid' : r'AC[a-zA-Z0-9_\-]{32}',
