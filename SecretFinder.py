@@ -310,10 +310,11 @@ def send_request(url):
     try:
         resp = requests.get(
             url = url,
-            timeout=10,
-            verify = False,
             headers = headers,
-            proxies = proxies
+            timeout=10,
+            allow_redirects=False,
+            proxies = proxies,
+            verify = False,
         )
         return resp.content.decode('utf-8','replace')
     except Exception as err:
