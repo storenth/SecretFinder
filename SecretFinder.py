@@ -310,6 +310,7 @@ def send_request(url):
     try:
         resp = requests.get(
             url = url,
+            timeout=10,
             verify = False,
             headers = headers,
             proxies = proxies
