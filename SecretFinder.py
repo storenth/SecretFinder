@@ -99,70 +99,6 @@ _regex = {
                     r"postgres\s*[`=:\"\.\-/]*\s*[^\s]+)",
 }
 
-_template = '''
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <style>
-       h1 {
-          font-family: sans-serif;
-       }
-       a {
-          color: #000;
-       }
-       .text {
-          font-size: 16px;
-          font-family: Helvetica, sans-serif;
-          color: #323232;
-          background-color: white;
-       }
-       .container {
-          background-color: #e9e9e9;
-          padding: 10px;
-          margin: 10px 0;
-          font-family: helvetica;
-          font-size: 13px;
-          border-width: 1px;
-          border-style: solid;
-          border-color: #8a8a8a;
-          color: #323232;
-          margin-bottom: 15px;
-       }
-       .button {
-          padding: 17px 60px;
-          margin: 10px 10px 10px 0;
-          display: inline-block;
-          background-color: #f4f4f4;
-          border-radius: .25rem;
-          text-decoration: none;
-          -webkit-transition: .15s ease-in-out;
-          transition: .15s ease-in-out;
-          color: #333;
-          position: relative;
-       }
-       .button:hover {
-          background-color: #eee;
-          text-decoration: none;
-       }
-       .github-icon {
-          line-height: 0;
-          position: absolute;
-          top: 14px;
-          left: 24px;
-          opacity: 0.7;
-       }
-  </style>
-  <title>LinkFinder Output</title>
-</head>
-<body contenteditable="true">
-  $$content$$
-
-  <a class='button' contenteditable='false' href='https://github.com/m4ll0k/SecretFinder/issues/new' rel='nofollow noopener noreferrer' target='_blank'><span class='github-icon'><svg height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></span> Report an issue.</a>
-</body>
-</html>
-'''
 
 def parser_error(msg):
     print('Usage: python %s [OPTIONS] use -h for help'%sys.argv[0])
@@ -281,27 +217,6 @@ def parser_input(input):
     path = "file://%s"% os.path.abspath(input)
     return [path if os.path.exists(input) else parser_error('file could not be found (maybe you forgot to add http/https).')]
 
-
-def html_save(output):
-    ''' html output '''
-    hide = os.dup(1)
-    os.close(1)
-    os.open(os.devnull,os.O_RDWR)
-    try:
-        text_file = open(args.output,"wb")
-        text_file.write(_template.replace('$$content$$',output).encode('utf-8'))
-        text_file.close()
-
-        print('URL to access output: file://%s'%os.path.abspath(args.output))
-        file = 'file:///%s'%(os.path.abspath(args.output))
-        if sys.platform == 'linux' or sys.platform == 'linux2':
-            subprocess.call(['xdg-open',file])
-        else:
-            webbrowser.open(file)
-    except Exception as err:
-        print('Output can\'t be saved in %s due to exception: %s'%(args.output,err))
-    finally:
-        os.dup2(hide,1)
 
 def cli_output(matched):
     ''' cli output '''
@@ -482,5 +397,3 @@ if __name__ == "__main__":
                         '<span style="background-color:yellow">%s</span>'%(match.get('context') if len(match.get('context'))>1 else match.get('context'))
                     )
                 output += header + body
-    if args.output != 'cli':
-        html_save(output)
